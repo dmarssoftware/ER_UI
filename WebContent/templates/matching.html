@@ -1,0 +1,118 @@
+<h2  class="page-header">Matching</h2>
+	
+			<div class="col-md-12 common-box-1">
+				<div class="col-md-2"><label>Select Cluster :</label></div>
+				<div class="col-md-3">
+					<select class = "form-control" data-ng-model="selectedCluster" id="selectcluster" data-ng-change="selectCluster();" data-ng-options="x for x in clusterDropdown">
+						<option value="">Select Cluster</option>
+					</select>
+				</div>
+				<div class="col-md-2 text-right"><b>Delete File</b></div>
+				<div class="col-md-3">
+					<select name="file_list" class="form-control" id="hdfs_file_list_dlt" data-ng-model="fileListDlt" data-ng-options="x for x in dltfileDropdown">
+					<option value="">Select File</option>
+					</select>
+				</div>
+				<div class="col-md-1">
+				   <button type="button" class="btn btn-danger"  id ="matchingContentDlt" data-ng-click = "deleteMatchingData()" >Delete</button>
+				</div>
+			</div>
+			
+			
+			
+			<br/>
+			<br clear="all" />
+			<div class="panel panel-default">
+				<div class="panel-heading">Enter Matching Details</div>
+				<div class="panel-body">
+				<form>
+				  <div class="row">
+					 <div class="col-md-7">
+						    <div class="col-md-3"><label for="InputFile">InputFile Path</label></div>
+						    <div class="col-md-6"><input type="text" id="InputFile" class="form-control txtPath_input margin-bottom10" data-ng-model="hdfspath" data-ng-disabled="isDisabled"></div>
+						    <div class="col-md-2"><button type="button" class="btn btn-info btnViewFiles" id="btnViewFile" data-ng-click="viewHdfsFileList();filelistEnabled()">View Files</button></div>
+					 </div>
+					 <div class="col-md-5">
+						    <div class="col-md-3"><label for="MatchingInputPath">File Name</label></div>
+						    <div class="col-md-8">
+						    <select name="file_list" class = "form-control " data-ng-disabled="isDisabled"  data-ng-model="matchingDTO.fileName"  data-ng-options="x for x in matchingfileDropdown" data-ng-change="viewMatchingFileContent();">
+								<option value="">Select File</option>
+							</select>
+							</div>
+					 </div>
+				  </div>
+				  <div class="row">
+					<div class="col-md-12">
+					    <div class="col-md-3"><label for="Delimiter">File Content</label></div>
+					    <div class="col-md-12"><textarea class="form-control margin-bottom10" rows="10" cols="100" data-ng-model="txtmatchingFilecontent"  id="matchingFilecontent" readonly></textarea></div>
+					</div>
+				  </div>
+				  <div class="row">
+				     <div class="col-md-5">
+					    <div class="col-md-6"><label for="MatchingInputPath">Matching Input Path</label></div>
+					    <div class="col-md-6">
+					    <select name="file_list" class = "form-control "  data-ng-model="matchingDTO.matchingInputPath"  data-ng-options="x for x in matchinginputfileDropdown" >
+							<option value="">Select File</option>
+						</select>
+						</div>
+				     </div>
+				     <div class="col-md-5">
+					    <div class="col-md-6"><label for="MatchingOutputPath">Matching Output Path</label></div>
+					    <div class="col-md-6"><input type="text" id="MatchingOutputPath" class="form-control" data-ng-model="matchingDTO.matchingOutputPath"></div>
+					</div>
+					<div class="col-md-2">
+					    <div class="col-md-6"><label for="Delimiter">Delimiter</label></div>
+					    <div class="col-md-6"><input type="text" data-ng-model="matchingDTO.delimiter" class="form-control"></div>
+					</div>
+				  </div>
+				  
+					<div class="col-sm-3"><button type="button" class="btn btn-link" data-ng-click="addColumnAlgorithm();">Add Column&Algorithm</button></div>	
+					
+					<div class="col-md-12" data-ng-repeat="matchingDetails in matchingDTO.matchingDetailsDTO track by $index" >
+						<div class="col-md-2"><label>Column No:</label></div>
+						<div class="col-md-2"><input type="text" class="form-control col-no margin-bottom10" data-ng-model="matchingDetails.columnNumber" data-ng-mouseleave="matchColvalidate();"></div>
+						<div class="col-md-2"><label>Algorithm:</label></div>
+						<div class="col-md-3"><select class = "form-control" data-ng-model="matchingDetails.algorithmName" data-ng-change="showAlgorithmDetails();" data-ng-options="x for x in algorithmDropdown">
+	   							<option value="">Select Algorithm</option></select></div>
+	   					<div class="col-md-2"><button type="button" class="btn btn-danger margin-bottom10" data-ng-click="removeColumnAlgorithm($index);" >Remove</button></div>
+					</div>
+					<br/>
+					<div class="pull-right"  >
+						<button type="button" class="btn btn-primary" id="btnSave" data-ng-click = "saveMatchingData();">Save</button>&nbsp;
+						<button type="reset" class="btn btn-default" data-ng-click = "resetMatching();" >Reset</button>&nbsp;
+					</div>
+				</form>
+				</div>
+				</div>
+				<div class="col-md-12 common-box-1">
+				 <div class="row">
+					<div class="col-md-12" data-ng-show="isShowMatchingCol" >
+					<h4 class="color-blue">Matching Column:</h4>
+						<table id="matchTable" class="table table-bordered"></table>
+					</div>
+				</div>
+				 <div class="row">
+					<div class="col-md-12" data-ng-show="isShowMatchingTable">
+						<h4 class="color-blue">Matching Jar Config Details :</h4>
+						 <table class="table table-bordered">
+							<th data-ng-show="false" >ID</th><th>File Name</th><th>ColumnNo-AlgorithmName</th><th>Delimeter</th><th>MatchingInputPath</th><th>MatchingOutputPath</th>
+							<tr data-ng-repeat="i in matchTablelist">
+								<td data-title="'ID'" data-ng-show="false">{{i.id}}</td>
+								<td data-title="'FileName'">{{i.fileName}}</td>
+								<td data-title="'ColAlgo'">{{i.columnAlgoName}}</td>
+								<td data-title="'Delim'">{{i.delimiter}}</td>
+								<td data-title="'InputPath'">{{i.matchingInputPath}}</td>
+								<td data-title="'OutputPath'">{{i.matchingOutputPath}}</td>
+							</tr>
+						</table>
+						 <div class = "pull-right" >
+							<button type="button" class="btn btn-primary" data-ng-click = "executeMatchingJar();" >Execute</button>
+						 </div>
+					</div>
+				</div>
+				<div class="col-md-12" data-ng-show="isShowStatus">
+							<a target="_blank" href="http://172.18.100.103:8080/">Click here to check status</a>
+				</div>
+				</div>
+			
+

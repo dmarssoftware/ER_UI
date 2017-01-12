@@ -1,0 +1,57 @@
+<h2  class="page-header">Classification</h2>
+
+<div class="row">
+			<div class="col-md-12">
+			<div class="col-md-12 common-box-1">
+				<div class="col-md-2">
+				<label>Select Cluster :</label></div>
+				<div class="col-md-3">
+				<select class = "form-control" data-ng-model="selectedCluster" id="selectcluster" data-ng-change="selectCluster();" data-ng-options="x for x in clusterDropdown">
+					<option value="">Select Cluster</option>
+				</select>
+				</div>
+				</div>
+				<br/>
+			</div>
+
+			<div class="col-md-12">
+			<div class="col-md-12 common-box-1">
+				 <div class="row">
+					 <div class="col-md-8">
+						    <div class="col-md-4"><label for="InputFile">InputFile Path</label></div>
+						    <div class="col-md-6"><input type="text" id="InputFile" class="form-control txtPath_input margin-bottom10" data-ng-model="hdfspath" ></div>
+						    <div class="col-md-2"><button type="button" class="btn btn-info" id="btnViewFile" data-ng-click="viewHdfsFileList();">View Files</button></div>
+					 </div>
+				</div>
+				<div class="row">
+					 <div class="col-md-8">
+						    <div class="col-md-4"><label for="MatchingInputPath">File Name</label></div>
+						    <div class="col-md-6">
+						    <select name="file_list" class = "form-control margin-bottom10 " data-ng-disabled="isDisabled"  data-ng-model="matchingDTO.fileName"  data-ng-options="x for x in matchingfileDropdown" data-ng-change="viewMatchingFileContent();">
+								<option value="">Select File</option>
+							</select>
+							</div>
+					 </div>
+				</div>
+				
+				<div class="row">
+					 <div class="col-md-8">
+						    <div class="col-md-4"><label for="MatchingInputPath">Weight File Name</label></div>
+						    <div class="col-md-6">
+						    <select name="file_list" class = "form-control margin-bottom10 " data-ng-disabled="isDisabled"  data-ng-model="matchingDTO.fileName"  data-ng-options="x for x in matchingfileDropdown" data-ng-change="viewMatchingFileContent();">
+								<option value="">Select File</option>
+							</select>
+							</div>
+					 </div>
+				</div>
+				
+				
+				<div class="pull-right">
+								<button class="btn btn-primary" data-ng-click="viewHdfsFileContent();">Submit</button>&nbsp;
+								<button type="reset" class="btn btn-default" id = "contentReset">Reset</button>&nbsp;
+				</div>
+			 </div>
+			</div>
+			<br/>
+		</div>
+

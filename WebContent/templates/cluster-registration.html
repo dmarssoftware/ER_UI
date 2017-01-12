@@ -1,0 +1,32 @@
+<h2 class="page-header">Cluster Registration</h2>
+<form>
+<div class="common-box-1 col-md-12">
+			<div class="col-md-12">
+				<div class="col-md-3"><label>Cluster Name :</label></div><div class="col-md-4"><input class = "form-control margin-top10 margin-bottom10" type="text" data-ng-model="clusterDTO.clusterName" ></div>
+			</div>
+			<br clear="all" />
+			<div class="col-md-12">
+				<div class="col-md-3"><label>Master IP :</label></div><div class="col-md-4"><input class = "form-control margin-top10 margin-bottom10" type="text" data-ng-model="clusterDTO.masterIp" ></div>
+			</div>
+			<br clear="all" />
+			<div class="col-md-12">
+				<div class="col-md-3"><label>Master Port:</label></div><div class="col-md-4"><input class = "form-control margin-top10 margin-bottom10" type="text" data-ng-model="clusterDTO.masterPort" ></div>
+			</div>
+			<br clear="all" />
+			<div class="col-md-3"><button class = "btn btn-link" type="button" data-ng-click = "addNewSlavesCluster();" >Add New Slaves Cluster</button></div>
+			<br clear="all" />
+				<div class="col-md-12" data-ng-repeat="slaveList in clusterDTO.slaveDTO track by $index">
+					<div class="col-md-3"><label>Slave Ip : {{$index+1}}</label><input class = "form-control"  type="text" data-ng-model="slaveList.slaveIp" ></div>
+					<div class="col-md-3"><label>Slave Port : {{$index+1}}</label><input class = "form-control"  type="text" data-ng-model="slaveList.slavePort" ></div>
+					<div class="col-md-1"><label>&nbsp;</label><button class = "btn btn-danger" type="button" data-ng-click = "removeSlaveRow($index);" >Remove</button></div>
+				</div>
+			<br clear="all" />
+	        <br clear="all" />
+			<div class="pull-right">
+				<button class ="btn btn-primary margin-top10 margin-bottom10" type="button" data-ng-click="submitClusterRegistration();">Register</button>&nbsp;
+				<button class ="btn btn-default margin-top10 margin-bottom10" type="reset" data-ng-click="">Reset</button>&nbsp;
+			</div>
+</div>
+</form>
+			
+			

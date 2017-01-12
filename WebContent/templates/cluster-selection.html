@@ -1,0 +1,35 @@
+<h2 class="page-header">Cluster-Information</h2>
+<div class="common-box-1 col-md-12">
+<div class="col-md-12 color-blue"><h4>Available Cluster Details:</h4></div>
+	<div id = "cluster-table">
+			<div class="col-md-12">
+				<table class="table table-bordered">
+				<th>Cluster Name</th><th>Master IP</th><th>Master Port</th><th>View Details </th>
+					<tr data-ng-repeat="i in clusterTablelist">
+						<td data-title="'ClusterName'">{{i.clusterName}}</td>
+						<td data-title="'Master IP'">{{i.masterIp}}</td>
+						<td data-title="'Master Port'">{{i.masterPort}}</td>
+						<td data-title="'viewCluster'"><button type="button" class="form-control" data-ng-click = "showClusterDetails(i.id);" >View</button></td> 
+						</tr>
+				</table>
+			</div>
+	 </div>
+	 
+	 <div class="col-md-12" data-ng-repeat="clusterList in clusterListToShow track by $index">
+	    <div class="row">
+			<div class="col-md-4"><label class="color-blue">Master IP:</label><input class = "form-control margin-bottom10" type="text"  readonly data-ng-model="clusterList.masterIp" ></div>
+			<div class="col-md-4"><label class="color-blue">Master Port:</label><input class = "form-control margin-bottom10" type="text" readonly  data-ng-model="clusterList.masterPort" ></div>
+		</div>
+		 <div class="row">
+		<div class="col-md-8">
+		<table class="table table-bordered">
+				<th>Slave IP &nbsp;&nbsp;&nbsp;</th><th>Slave Port</th>
+					<tr data-ng-repeat="i in clusterList.slaveDTO">
+						<td data-title="'Slave IP'">{{i.slaveIp}}</td>
+						<td data-title="'Slave Port'">{{i.slavePort}}</td>
+					</tr>
+		</table>
+		</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,132 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RS Entity Resolution</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<!-- animate -->
+		<link rel="stylesheet" href="resources/css/animate.min.css">
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+		<!-- font-awesome -->
+		<link rel="stylesheet" href="resources/css/font-awesome.min.css">
+		<!-- google font -->
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700,800' rel='stylesheet' type='text/css'>
+		<!-- custom -->
+		<link rel="stylesheet" href="resources/css/admin.css">
+
+		<script type="text/javascript">
+		   var APP_DATA = {
+				   navData: [
+				       {id:1, navigation:true, title:"Cluster Management", htmlLink:"#", routeLink:"/", template:"", controller:"clusterManagement", symbol:"fa fa-th", children:[
+				          {id:2, navigation:true, title:"Cluster Registration", htmlLink:"#cluster-registration", routeLink:"/cluster-registration", template:"cluster-registration", controller:"clusterManagement", symbol:"fa fa-area-chart"},
+				          {id:3, navigation:true, title:"Cluster Information", htmlLink:"#cluster-selection", routeLink:"/cluster-selection", template:"cluster-selection", controller:"clusterManagement", symbol:"fa fa-pie-chart"}
+				       ]},
+				       {id:4, navigation:true, title:"File Upload", htmlLink:"#file-upload", routeLink:"/file-upload", template:"file-upload", controller:"fileuploadController", symbol:"upload"},
+				       {id:5, navigation:true, title:"PreProcessing", htmlLink:"#", routeLink:"/", template:"", controller:"", symbol:"dashboard" ,children:[
+				          {id:6, navigation:true, title:"Address Segmentation", htmlLink:"#address-segmentation", routeLink:"/address-segmentation", template:"address-segmentation", controller:"preprocessingController", symbol:"fa fa-area-chart"}
+				        ]}, 
+				       {id:7, navigation:true, title:"Indexing", htmlLink:"#indexing", routeLink:"/indexing", template:"indexing", controller:"indexingController", symbol:"fa fa-outdent"},
+				       {id:8, navigation:true, title:"Matching", htmlLink:"#matching", routeLink:"/matching", template:"matching", controller:"matchingController", symbol:"fa fa-spinner"},
+				       {id:9, navigation:true, title:"Classification", htmlLink:"#classification", routeLink:"/classification", template:"classification", controller:"classificationcontroller", symbol:"bar-chart-o"},
+				       {id:10, navigation:false, title:"Front Page", htmlLink:"#/", routeLink:"/", template:"front-page", symbol:"fa fa-outdent"},
+				       {id:11, navigation:false, title:"User Profile", htmlLink:"#profile", routeLink:"/profile", template:"profile", symbol:"fa fa-outdent"} ,
+				       {id:12, navigation:false, title:"Change Password", htmlLink:"#changePassword", routeLink:"/changePassword", template:"changePassword", symbol:""} 
+				     
+				   ]
+		   };
+		</script>
+		
+		<script src="resources/js/static/angular.min.js"></script>
+		<script src="resources/js/static/angular-route.min.js"></script>
+		<!-- jQuery -->
+		<script src="resources/js/static/jquery.js"></script>
+		<!-- bootstrap -->
+		<script src="resources/js/static/bootstrap.min.js"></script>
+		<!-- custom -->
+		<script type="text/javascript" src="resources/js/custom/function.js"></script>
+		<script type="text/javascript" src="resources/js/custom/home.js"></script>
+		<script type="text/javascript" src="resources/js/custom/clusterManagement.js"></script>
+		<script type="text/javascript" src="resources/js/custom/fileupload.js"></script>
+		<script type="text/javascript" src="resources/js/custom/indexing.js"></script>
+		<script type="text/javascript" src="resources/js/custom/matching.js"></script>
+		<script type="text/javascript" src="resources/js/custom/preprocessing.js"></script>
+		<script type="text/javascript" src="resources/js/custom/classification.js"></script>
+		
+</head>
+<body data-ng-app="myApp">
+<div id="wrapper">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">RS Software</a>
+               
+            </div>
+			
+            <ul class="nav navbar-top-links navbar-right">
+                <li>Welcome User </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#/"><i class="fa fa-home"></i> Home</a>
+                        <li class="divider"></li>
+                        <li><a href="#profile"><i class="fa fa-user"></i> User Profile</a>
+                        <li class="divider"></li>
+                        <li><a href="#changePassword"><i class="fa fa-lock"></i> Change Password</a>
+                        <li class="divider"></li>
+                        <li><a href="index.html"><i class="fa fa-sign-out"></i> Logout</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu" data-ng-controller="leftNavigation">
+                        <li data-ng-if="nav.navigation" data-ng-repeat="nav in leftNav">
+                            <a data-ng-if="!nav.children" href="{{nav.htmlLink}}"><i class="fa fa-{{nav.symbol}} fa-fw"></i> {{nav.title}}</a>
+                            <a data-ng-if="nav.children" href="javascript:;" data-toggle="collapse" data-target="#list-{{nav.id}}"><i class="fa fa-{{nav.symbol}} fa-fw"></i> {{nav.title}}<span class="fa arrow"></span></a>
+                            <ul id="list-{{nav.id}}" data-ng-if="nav.children" class="nav nav-second-level collapse">
+                                <li data-ng-if="childNav.navigation" data-ng-repeat="childNav in nav.children">
+                                    <a href="{{childNav.htmlLink}}"><i class="fa fa-{{childNav.symbol}} fa-fw"></i> {{childNav.title}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ng-view"></div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <!-- /#page-wrapper -->
+
+
+    </div>
+		
+		<footer class="">
+				<div class="col-md-8">
+      			  <a href="">About</a>  | <a href="">Terms & Conditions</a> | <a href="">Privacy</a>    
+    			</div>
+     			 <div class="col-md-4">
+     				   <p class="muted pull-right">© 2016 RS Software(I) Ltd. All rights reserved</p>
+    			 </div>
+		</footer>
+</body>
+</html>

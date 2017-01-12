@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RS Entity Resolution Registration</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="resources/css/bootstrap.min.css">
+		<!-- font-awesome -->
+		<link rel="stylesheet" href="resources/css/font-awesome.min.css">
+		<!-- google font -->
+		<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700,800' rel='stylesheet' type='text/css'>
+		<!-- custom -->
+		<link rel="stylesheet" href="resources/css/style.css">
+		<script src="resources/js/static/angular.min.js"></script>
+		<script src="resources/js/static/angular-route.min.js"></script>
+		<!-- jQuery -->
+		<script src="resources/js/static/jquery.js"></script>
+		<!-- bootstrap -->
+		<script src="resources/js/static/bootstrap.min.js"></script>
+		<!-- custom -->
+		<script type="text/javascript" src="resources/js/custom/function.js"></script>
+		<script src="resources/js/custom/register.js"></script>
+</head>
+<body data-ng-app="myApp">
+<div data-ng-controller="registrationController">
+<div class="container">   
+<br/>
+<center><h2>RS Entity Resolution Registration</h2></center>
+        <div id="signupbox" style="display:; margin-top:30px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">Sign Up</div>
+                        </div>  
+                        <div class="panel-body" >
+                            <form id="signupform" class="form-horizontal" role="form">
+                               <div class="form-group">
+                                    <label for="firstname" class="col-md-3 control-label">Name</label>
+                                    <div class="col-md-9">
+                                        <input type="text"  data-ng-model="userDetails.name"  class="form-control" name="firstname" placeholder="Enter your Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">Email </label>
+                                    <div class="col-md-9">
+                                        <input type="text" data-ng-model="userDetails.email"  class="form-control" name="email" placeholder="Email Address">
+                                    </div>
+                                </div>                               
+                                <div class="form-group">
+                                    <label for="lastname" class="col-md-3 control-label">User Name</label>
+                                    <div class="col-md-9">
+                                        <input type="text" data-ng-model="userDetails.username" class="form-control" name="username" placeholder="User Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" data-ng-model="userDetails.password"  class="form-control" name="passwd" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Confirm Password</label>
+                                    <div class="col-md-9">
+                                        <input type="password" data-ng-model="userDetails.confirmPassword" class="form-control" name="passwd" placeholder="Confirm Password">
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                 	<label  class="col-md-3"></label>
+                                    <div class="col-md-9">
+                                        <div style="color:red;" id="login-alert" class="col-sm-12">{{msg}}</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <!-- Button -->                                        
+                                    <div class="col-md-offset-4 col-md-9">
+                                        <button  type="button" class="btn btn-info" data-ng-click="doRegisterUser();"><i class="icon-hand-right"></i> &nbsp Sign Up  &nbsp</button>
+                                        <button  type="button" class="btn btn-default"><i class="icon-hand-right"></i> &nbsp Cancel &nbsp</button>
+                                    </div>
+                                </div>
+                            </form>
+                         </div>
+                    </div>             
+         </div> 
+    </div> 
+</div>
+</div>
+</body>
+</html>
